@@ -4,6 +4,8 @@ using JwtAuthApi.Middleware;
 using JwtAuthApi.Models;
 using JwtAuthApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -203,7 +205,7 @@ try
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWT Auth API v1");
-            c.RoutePrefix = string.Empty; // Swagger UI 在根路徑
+            c.RoutePrefix = "swagger"; // Swagger UI 在 /swagger 路徑
         });
     }
 
@@ -217,7 +219,19 @@ try
 
     app.MapControllers();
 
-    Log.Information("應用程式啟動成功，監聽: {Urls}", string.Join(", ", app.Urls));
+    // 在啟動後記錄監聽的 URLs
+    app.Lifetime.ApplicationStarted.Register(() =>
+    {
+        var addresses = app.Services.GetRequiredService<IServer>().Features.Get<IServerAddressesFeature>();
+        if (addresses != null)
+        {
+            foreach (var address in addresses.Addresses)
+            {
+                Log.Information("現在監聽: {Address}", address);
+            }
+        }
+    });
+
     app.Run();
 }
 catch (Exception ex)
