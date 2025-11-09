@@ -17,7 +17,7 @@ Vite 在執行 `npm run build` 時：
 讀取 .env.production → VITE_API_URL=https://api.yourdomain.com/api/v1
 
 # 步驟 2: 替換程式碼中的變數
-將所有 import.meta.env.VITE_API_URL 
+將所有 import.meta.env.VITE_API_URL
 替換為 "https://api.yourdomain.com/api/v1"
 
 # 步驟 3: 打包成 JavaScript
@@ -34,10 +34,11 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://localhost:7198/api
 
 ```javascript
 // 環境變數已被直接寫入程式碼
-const API_BASE_URL = "https://api.yourdomain.com/api/v1";
+const API_BASE_URL = 'https://api.yourdomain.com/api/v1';
 ```
 
 ### ✅ **結果：**
+
 - `.env` 檔案**不會**被複製到 `dist/` 目錄
 - 環境變數的值已經**硬編碼**到 JavaScript 檔案中
 - 部署後**無法**透過修改 `.env` 來改變 API 網址
@@ -256,7 +257,8 @@ await loadConfig();
 
 **優點：** 部署後可修改 `config.json`，不需重新建構
 
-**缺點：** 
+**缺點：**
+
 - 增加初始載入時間
 - 需要額外的 HTTP 請求
 - 設定檔暴露在公開目錄
@@ -269,37 +271,42 @@ await loadConfig();
 
 ## 📊 建構與部署對照表
 
-| 項目 | 建構時 | 部署後 |
-|------|--------|--------|
-| **讀取 .env** | ✅ 是 | ❌ 否 |
-| **環境變數寫入程式碼** | ✅ 是 | - |
-| **.env 檔案在 dist/** | ❌ 否 | ❌ 否 |
-| **可修改 API URL** | ✅ 修改 .env 後重新建構 | ❌ 無法修改（已寫入程式碼） |
-| **dist/ 內容** | 產生靜態檔案 | 直接部署這些檔案 |
+| 項目                   | 建構時                  | 部署後                      |
+| ---------------------- | ----------------------- | --------------------------- |
+| **讀取 .env**          | ✅ 是                   | ❌ 否                       |
+| **環境變數寫入程式碼** | ✅ 是                   | -                           |
+| **.env 檔案在 dist/**  | ❌ 否                   | ❌ 否                       |
+| **可修改 API URL**     | ✅ 修改 .env 後重新建構 | ❌ 無法修改（已寫入程式碼） |
+| **dist/ 內容**         | 產生靜態檔案            | 直接部署這些檔案            |
 
 ---
 
 ## ✅ 最佳實踐
 
 1. **建構前確認環境變數正確**
+
    - 檢查 `.env.production` 中的 API URL
    - 確保後端 URL 可從客戶端訪問
 
 2. **為不同環境建立不同的 .env 檔案**
+
    - `.env.development` - 本機開發
    - `.env.staging` - 測試環境
    - `.env.production` - 生產環境
 
 3. **使用建構指令區分環境**
+
    ```bash
    npm run build:staging
    npm run build:production
    ```
 
 4. **建構後進行測試**
+
    ```bash
    npm run preview:production
    ```
+
    在本機預覽生產版本，確認 API 連接正確
 
 5. **記錄每次部署的設定**
@@ -315,12 +322,14 @@ await loadConfig();
 **原因：** API URL 設定錯誤
 
 **檢查：**
+
 ```bash
 # 開啟瀏覽器開發者工具 → Network
 # 查看實際請求的 URL 是否正確
 ```
 
 **解決：**
+
 ```bash
 # 1. 修正 .env.production
 # 2. 重新建構
@@ -334,6 +343,7 @@ npm run build
 
 **解決：**
 修改後端 `Program.cs`：
+
 ```csharp
 policy.WithOrigins("https://yourfrontend.com")
 ```
@@ -341,6 +351,7 @@ policy.WithOrigins("https://yourfrontend.com")
 ### 問題 3：建構後環境變數未生效
 
 **檢查：**
+
 1. 變數名稱是否以 `VITE_` 開頭
 2. 是否在建構前修改了 `.env.production`
 3. 是否重新執行了 `npm run build`
