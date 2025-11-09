@@ -147,7 +147,7 @@ try
         {
             Title = "JWT Authentication API",
             Version = "v1",
-            Description = "ASP.NET Core 8 JWT 驗證 API with Refresh Token Rotation",
+            Description = "ASP.NET Core 8 (LTS) JWT 驗證 API with Refresh Token Rotation",
             Contact = new OpenApiContact
             {
                 Name = "Development Team",

@@ -1,6 +1,6 @@
-# JWT Authentication API for ASP.NET Core 9
+# JWT Authentication API for ASP.NET Core 8
 
-[![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](https://dotnet.microsoft.com/download)
+[![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/download)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://github.com/yourusername/jwt-auth-api/workflows/CI%2FCD%20Pipeline/badge.svg)](https://github.com/yourusername/jwt-auth-api/actions)
 
@@ -21,7 +21,7 @@
 
 ### 技術棧
 
-- **ASP.NET Core 9.0**：最新的 .NET 平台
+- **ASP.NET Core 8.0**：穩定的 LTS 版本
 - **JWT Bearer Authentication**：業界標準的令牌驗證
 - **Serilog**：結構化日誌記錄
 - **Swagger/OpenAPI**：自動生成 API 文件
@@ -39,7 +39,7 @@
 
 ## 📋 先決條件
 
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - IDE：[Visual Studio 2022](https://visualstudio.microsoft.com/) 或 [VS Code](https://code.visualstudio.com/)
 - （選用）[Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli)（用於 Azure Key Vault）
 
@@ -303,7 +303,7 @@ dotnet run --project JwtAuthApi.Benchmarks --configuration Release
 
 快速步驟：
 
-1. 安裝 .NET 9.0 Hosting Bundle
+1. 安裝 .NET 8.0 Hosting Bundle
 2. 建立應用程式集區（無受控程式碼）
 3. 設定環境變數 `Jwt__SecretKey`
 4. 發布應用程式
@@ -317,7 +317,7 @@ az webapp create \
   --name jwtauthapi \
   --resource-group JwtAuthRG \
   --plan JwtAuthPlan \
-  --runtime "DOTNET|9.0"
+  --runtime "DOTNET|8.0"
 
 # 設定密鑰（使用 Azure Key Vault 更佳）
 az webapp config appsettings set \
@@ -426,6 +426,11 @@ az webapp deployment source config-zip \
 
 ## 🔖 版本歷史
 
+### v1.1.0 (2025-01-09)
+
+- 🔻 降版至 .NET 8.0 LTS 確保長期支援
+- 🔒 保留 .NET 9 版本於 dotnet9-backup 分支
+
 ### v1.0.0 (2025-01-09)
 
 - ✨ 初始版本發布
@@ -438,4 +443,8 @@ az webapp deployment source config-zip \
 
 ---
 
-**Made with ❤️ using ASP.NET Core 9**
+**Made with ❤️ using ASP.NET Core 8 (LTS)**
+
+```
+
+```
