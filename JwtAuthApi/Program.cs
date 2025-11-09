@@ -56,6 +56,18 @@ try
     builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
     builder.Services.AddSingleton<IUserService, InMemoryUserService>();
 
+    // 配置 CORS
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowFrontend", policy =>
+        {
+            policy.WithOrigins("http://localhost:5173")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+    });
+
     // 配置 JWT 驗證
     var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
     builder.Services.AddAuthentication(options =>
@@ -199,6 +211,7 @@ try
     app.UseHttpsRedirection();
     app.UseSerilogRequestLogging();
 
+    app.UseCors("AllowFrontend");
     app.UseAuthentication();
     app.UseAuthorization();
 
