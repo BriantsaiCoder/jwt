@@ -12,7 +12,8 @@ export const useAuth = () => {
   // 初始化時檢查使用者狀態
   useEffect(() => {
     fetchUser();
-  }, [fetchUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 只在元件掛載時執行一次
 
   const handleLogin = async (username: string, password: string) => {
     try {

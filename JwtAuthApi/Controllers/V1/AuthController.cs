@@ -201,16 +201,22 @@ public class AuthController : ControllerBase
   [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
   public IActionResult GetCurrentUser()
   {
-    var userId = User.FindFirst("sub")?.Value;
+    var userId = User.FindFirst("sub")?.Value
+      ?? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
     var username = User.Identity?.Name;
-    var roles = User.FindAll("role").Select(c => c.Value).ToArray();
+    var roles = User.FindAll("role")
+      .Concat(User.FindAll(System.Security.Claims.ClaimTypes.Role))
+      .Select(c => c.Value)
+      .Distinct()
+      .ToArray();
 
     return Ok(new
     {
-      UserId = userId,
-      Username = username,
-      Roles = roles,
-      Claims = User.Claims.Select(c => new { c.Type, c.Value }).ToArray()
+      id = userId,
+      username = username,
+      roles = roles,
+      createdAt = DateTime.UtcNow.ToString("o"),
+      claims = User.Claims.Select(c => new { type = c.Type, value = c.Value }).ToArray()
     });
   }
 }
