@@ -1,0 +1,39 @@
+Summary
+  Generated on: 2025/11/9 - 下午3:59:23
+  Parser: OpenCover
+  Assemblies: 1
+  Classes: 18
+  Files: 16
+  Line coverage: 74.2%
+  Covered lines: 600
+  Uncovered lines: 208
+  Coverable lines: 808
+  Total lines: 1634
+  Branch coverage: 46.2% (61 of 132)
+  Covered branches: 61
+  Total branches: 132
+  Method coverage: 87.6% (71 of 81)
+  Full method coverage: 79% (64 of 81)
+  Covered methods: 71
+  Fully covered methods: 64
+  Total methods: 81
+
+JwtAuthApi                                              74.2%
+  JwtAuthApi.Controllers.V1.AdminController             29.4%
+  JwtAuthApi.Controllers.V1.AuthController              80.3%
+  JwtAuthApi.Controllers.V1.UpdateProfileRequest         100%
+  JwtAuthApi.Controllers.V1.UserController              55.5%
+  JwtAuthApi.Controllers.V1.WeatherForecast              100%
+  JwtAuthApi.Controllers.V1.WeatherForecastController   62.5%
+  JwtAuthApi.DTOs.ErrorResponse                          100%
+  JwtAuthApi.DTOs.LoginRequest                           100%
+  JwtAuthApi.DTOs.RefreshRequest                         100%
+  JwtAuthApi.DTOs.TokenResponse                          100%
+  JwtAuthApi.Middleware.GlobalExceptionHandler          11.1%
+  JwtAuthApi.Models.JwtSettings                          100%
+  JwtAuthApi.Models.RefreshTokenFamily                   100%
+  JwtAuthApi.Models.User                                 100%
+  JwtAuthApi.Services.InMemoryUserService                100%
+  JwtAuthApi.Services.JwtTokenService                   90.1%
+  JwtAuthApi.Tools.SecretKeyGenerator                      0%
+  Program                                               92.4%
